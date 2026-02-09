@@ -16,6 +16,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client saveClient(Client client) {
+        // Simple save works for Many-to-Many on creation
         return clientRepository.save(client);
     }
 
@@ -32,12 +33,17 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client updateClient(Long id, Client clientDetails) {
         return clientRepository.findById(id).map(client -> {
-            // 📝 Matching your Client.java fields exactly:
             client.setCompanyName(clientDetails.getCompanyName());
             client.setContactPerson(clientDetails.getContactPerson());
             client.setPhone(clientDetails.getPhone());
             client.setEmail(clientDetails.getEmail());
             client.setAddress(clientDetails.getAddress());
+
+            // 🆕 CRITICAL: Update the products relationship list
+            if (clientDetails.getProducts() != null) {
+                client.setProducts(clientDetails.getProducts());
+            }
+
             return clientRepository.save(client);
         }).orElseThrow(() -> new RuntimeException("Client not found with id: " + id));
     }
