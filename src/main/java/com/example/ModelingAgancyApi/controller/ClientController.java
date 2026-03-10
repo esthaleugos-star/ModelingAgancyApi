@@ -42,4 +42,10 @@ public class ClientController {
         clientService.deleteClient(id);
         return ResponseEntity.ok("Client deleted successfully");
     }
+
+    @PutMapping("/{clientId}/assign-product/{productId}")
+    public ResponseEntity<String> assignProduct(@PathVariable Long clientId, @PathVariable Long productId) {
+        clientService.assignProductToClient(clientId, productId);
+        return ResponseEntity.ok("Product successfully assigned to client");
+    }
 }
