@@ -15,7 +15,7 @@ public class Order {
     private String bookingDate;
     private Double totalAmount;
 
-    // ✅ Order exposes client (THIS is correct)
+    // ✅ Order exposes client
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
@@ -24,4 +24,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    // ✅ NEW: Order exposes model
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
 }

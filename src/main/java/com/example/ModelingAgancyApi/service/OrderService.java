@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface OrderService {
 
-    // ✅ NEW clean method
     Order saveOrder(OrderCreateRequest request);
 
     List<Order> getAllOrders();
@@ -18,4 +17,7 @@ public interface OrderService {
     Order updateOrder(Long id, Order orderDetails);
 
     void deleteOrder(Long id);
+
+    // ✅ NEW METHOD
+    Order assignModelToOrder(Long orderId, Long modelId);
 }

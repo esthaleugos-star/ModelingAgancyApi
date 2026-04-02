@@ -24,7 +24,7 @@ public class Model {
     private Integer age;
     private String gender;
 
-    // ✅ NEW RELATIONSHIP WITH PRODUCT
+
     @ManyToMany
     @JoinTable(
             name = "model_product",

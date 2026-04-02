@@ -16,7 +16,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    // ✅ CLEAN POST (Swagger-friendly)
     @PostMapping
     public Order createOrder(@RequestBody OrderCreateRequest request) {
         return orderService.saveOrder(request);
@@ -46,5 +45,15 @@ public class OrderController {
     public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);
         return ResponseEntity.ok("Order deleted successfully");
+    }
+
+    // ✅ NEW ENDPOINT
+    @PutMapping("/{orderId}/assign-model/{modelId}")
+    public ResponseEntity<Order> assignModelToOrder(
+            @PathVariable Long orderId,
+            @PathVariable Long modelId) {
+
+        Order updatedOrder = orderService.assignModelToOrder(orderId, modelId);
+        return ResponseEntity.ok(updatedOrder);
     }
 }
