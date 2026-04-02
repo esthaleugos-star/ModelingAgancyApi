@@ -42,4 +42,14 @@ public class ModelController {
         modelService.deleteModel(id);
         return ResponseEntity.ok("Model deleted successfully");
     }
+
+    // ✅ NEW ENDPOINT
+    @PutMapping("/{modelId}/assign-product/{productId}")
+    public ResponseEntity<Model> assignProductToModel(
+            @PathVariable Long modelId,
+            @PathVariable Long productId) {
+
+        Model updatedModel = modelService.assignProductToModel(modelId, productId);
+        return ResponseEntity.ok(updatedModel);
+    }
 }
